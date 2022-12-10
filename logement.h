@@ -6,6 +6,7 @@
  typedef struct Logement {
     double id, accomodates, bedrooms, bathdrooms, beds, price, min_nights, max_nights, number_of_reviews, distance_x;
     }Logement;
+const Logement logement_x = {105, 3, 2, 1, 3, 508, 4, 110, 178, 0};    
 
 /**********************************************************/
 Logement liste_de_logement[7917];

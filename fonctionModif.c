@@ -1,8 +1,10 @@
-#include "logement.h"
+#include "bibliModif.h"
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
 #include <stdlib.h>
+
+
  /*cette fonction permet de transformer les chaines de caractere collectées en entier et les stocke dans un tableau*/  
  void stockage_dans_logement(double *donnee, int *t, Logement *l){
     
@@ -44,42 +46,17 @@
  /*pour afficher un logement*/
 void afficher_logement(Logement *l){
 
-        printf("{%f ; %f ; %f ; %f ; %f ; %f ; %f ; %f ; %f ; %f}\n", (*l).id, (*l).accomodates, (*l).bedrooms, (*l).bathdrooms, (*l).beds, (*l).price, (*l).min_nights, (*l).max_nights, (*l).number_of_reviews, (*l).distance_x);
+        printf("{%f ; %f ; %f ; %f ; %f ; %f ; %f ; %f ; %f ; dist[ %f , %f , %f ]\n", (*l).id, (*l).accomodates, (*l).bedrooms, (*l).bathdrooms, (*l).beds, (*l).price, (*l).min_nights, (*l).max_nights, (*l).number_of_reviews, (*l).distance[0], (*l).distance[1], (*l).distance[2]);
+
 }
 /************************************************************************************************/
 
-/************************************************************************************************************/
-
-/*comparer deux Logement par rapport au champ distance*/
-
-
  int comparer_logement( const void *first, const void *second )
 {
-    double i1 = (*(const Logement*)first).distance_x;
-    double i2 = (*(const Logement*)second).distance_x;
+    double i1 =((*(const Logement*)first).distance[0] + (*(const Logement*)first).distance[1] + (*(const Logement*)first).distance[2])/3 ;
+    double i2 = ((*(const Logement*)second).distance[0] + (*(const Logement*)second).distance[1] + (*(const Logement*)second).distance[2])/3 ;
     if (i1 < i2)
         return -1;
     else
         return +1;
-}
-
-/*foncton qui randomise le tableau de logement*/
-void fonction_random( Logement log[])
-{   
-    int p;
-    int t = 0;
-    Logement temp;
-    srand(time(NULL));
-    for(int i=0; i<7917; i++)
-    {
-        p = rand() % 7917;
-        while(p != t)
-        {
-            temp = log[i];
-            log[i] = log[p];
-            log[p] = temp;
-        }
-        
-        int t = p;
-    }    
 }

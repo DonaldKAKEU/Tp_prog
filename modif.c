@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "logement.h"
+#include "bibliModif.h"
+#include "fonctionModif.c"
 #include <search.h>
-
 
 int main()
 {
@@ -22,8 +22,6 @@ if (dataset == NULL)
     return 1;
 }
 
-    /*ici je calcule toutes les distance par rapport au logfement x et j'en fait un tableau */
-Logement logement_x = {105, 3, 2, 1, 3, 508, 4, 110, 178, 0}; 
     
 fgets(ligne_du_fichier, 255, dataset); // premiere lecture pour eliminer la ligne qui contient les noms des varaiables
     
@@ -51,15 +49,14 @@ for (i = 0; i < 1000; i++)
 
             donnee_alphabetique=strtok(NULL, sep);   // permet de passer à la valeur suivante sur la meme ligne                                           
                 
-        }  
+        } 
 
-logement.distance_x = abs((logement.accomodates-logement_x.accomodates)); // on rajoute la caractéristique distance 
-
+logement.distance[0] = abs((logement.accomodates-logement_x.accomodates)); // on rajoute la caractéristique distance 
+logement.distance[1] = abs((logement.bedrooms-logement_x.bedrooms));
+logement.distance[2] = abs((logement.beds-logement_x.beds));
 liste_de_logement[i] = logement; // les logement sont stockés par un tableau de logement 
     
-    
 } 
-
 
 fclose(dataset);
 
@@ -68,12 +65,11 @@ for (int i = 0; i < 1000; i++)
     afficher_logement(&liste_de_logement[i]);
 }
 
-
 printf("*************APRES LE TRI *************************\n");
 
 //fonction_random(liste_de_logement);
 
-    /* ici je tri le tableau qui contient les distances */
+    /* ici je tri le tableau qui contient les distances*/
 
 qsort(liste_de_logement, 20, sizeof(liste_de_logement[0]), comparer_logement);
 
@@ -88,10 +84,10 @@ for (int i = 0; i < 1000; i++)
     /*l'utilisateur entre les nombre de logement les plus proches*/
 
 
-printf("*******entrer la valeur de k****** --->       ");
+printf("******************* entrer la valeur de k : Le nombre de logement sur lesquels vous souhaitez evaluer le prix de votre logement ************************ --->       ");
 scanf("%d", &k);
 
-    /*ici j'affiche les k logements les plus proches */
+    /*ici j'affiche les k logements les plus proches*/ 
 Logement *k_logement = NULL;
 
 k_logement = malloc(k*sizeof(Logement));
